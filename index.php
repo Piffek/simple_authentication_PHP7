@@ -1,8 +1,7 @@
 <?php
 
 session_start();
-
-$token = function (string $lock = null) {
+$token = function ($lock = null) {
     if (! isset($_SESSION['token'])) {
         $_SESSION['token'] = bin2hex(random_bytes(32));
     }
@@ -12,19 +11,18 @@ $token = function (string $lock = null) {
     }
 
     if (is_null($lock)) {
-        $_SESSION['rightToken'] = $_SESSION['token'];
+        $_SESSION['right_token'] = $_SESSION['token'];
     }
 
-    $_SESSION['rightToken'] = hash_hmac('sha256', $lock, $_SESSION['second_token']);
+    $_SESSION['right_token'] = hash_hmac('sha256', $lock, $_SESSION['second_token']);
 
-    return $_SESSION['rightToken'];
+    return $_SESSION['right_token'];
 };
 
-if (isset($_POST['token']) && hash_equals($_POST['token'], $_SESSION['rightToken'])) {
+if(isset($_POST['submit']) && hash_equals($_POST['token'], $_SESSION['right_token'])){
     echo $_POST['name']."\n";
-    echo $_SESSION['rightToken'];
+    echo $_POST['token'];
 }
-
 ?>
 
 <form method="POST" action="/">
