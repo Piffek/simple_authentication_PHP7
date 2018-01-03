@@ -8,13 +8,10 @@ if (! isset($_SESSION['token'])) {
     $token = $_SESSION['token'];
 }
 
-if (hash_equals($_SESSION['token'], $_POST['token'])) {
-    if (isset($_POST['submit'])) {
-        echo $_POST['name']."\n";
-        echo $_SESSION['token'];
-    }
-} else {
-    echo 'Bad authentication';
+if (isset($_POST['submit']) && hash_equals($_SESSION['token'], $_POST['token'])) {
+    echo $_POST['name']."\n";
+    echo $_SESSION['token'];
 }
 
 ?>
+
