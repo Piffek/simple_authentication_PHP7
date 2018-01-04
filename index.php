@@ -19,7 +19,7 @@ $token = function ($lock = null) {
     return $_SESSION['right_token'];
 };
 
-if(isset($_POST['submit']) && hash_equals($_POST['token'], $_SESSION['right_token'])){
+if(isset($_POST['submit']) && hash_equals($_SESSION['right_token'], $_POST['token'])){
     echo $_POST['name']."\n";
     echo $_POST['token'];
 }
